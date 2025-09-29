@@ -103,3 +103,7 @@ build_metadata.AdditionalFiles.CssScope = b-a8f5pilkds
 [E:/GitHub/LibraryPortalBlazorWebApp/Components/Layout/NavMenu.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcTmF2TWVudS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = b-1g1sgu6fzw
+
+[E:/GitHub/LibraryPortalBlazorWebApp/Components/Pages/_Host.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xfSG9zdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 

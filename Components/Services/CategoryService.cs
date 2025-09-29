@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using LibraryPortalBlazorWebApp.Components.Models;
+using Microsoft.Extensions.Options;
 
 namespace LibraryPortalBlazorWebApp.Components.Services
 {
@@ -29,7 +30,7 @@ namespace LibraryPortalBlazorWebApp.Components.Services
 
         public async Task<Category?> UpdateCategoryAsync(Category category)
         {
-            var response = await _http.PutAsJsonAsync($"{_baseUrl}/{category.Id}", category);
+            var response = await _http.PutAsJsonAsync($"{_baseUrl}/{category.CategoryId}", category);
             return await response.Content.ReadFromJsonAsync<Category>();
         }
 

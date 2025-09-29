@@ -1,5 +1,6 @@
 using System.Net.Http.Json;
 using LibraryPortalBlazorWebApp.Components.Models;
+using Microsoft.Extensions.Options;
 
 namespace LibraryPortalBlazorWebApp.Components.Services;
 
@@ -28,7 +29,7 @@ public class AuthorService
 
     public async Task<Author?> UpdateAuthorAsync(Author author)
     {
-        var response = await _http.PutAsJsonAsync($"{_baseUrl}/{author.Id}", author);
+        var response = await _http.PutAsJsonAsync($"{_baseUrl}/{author.AuthorId}", author);
         return await response.Content.ReadFromJsonAsync<Author>();
     }
 

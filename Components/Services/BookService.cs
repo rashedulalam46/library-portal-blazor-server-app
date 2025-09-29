@@ -1,4 +1,5 @@
 using LibraryPortalBlazorWebApp.Components.Models;
+using Microsoft.Extensions.Options;
 using System.Net.Http.Json;
 
 namespace LibraryPortalBlazorWebApp.Components.Services;
@@ -8,10 +9,10 @@ public class BookService
     private readonly HttpClient _http;
     private readonly string _baseUrl;
 
-    public BookService(HttpClient http, IConfiguration config)
+    public BookService(HttpClient http, IOptions<ApiSettings> options)
     {
         _http = http;
-        _baseUrl = config["ApiSettings:BaseUrl"] + "/books";
+        _baseUrl = $"{options.Value.BaseUrl}/books";
     }
 
     public async Task<List<Book>> GetBooksAsync()
