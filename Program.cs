@@ -33,6 +33,6 @@ app.UseRouting();
 
 // **This part is missing in your current file**
 app.MapBlazorHub();                  // Maps the SignalR hub for Blazor Server
-app.MapFallbackToPage("/_Host");     // Fallback to _Host.cshtml for all other routes
+//app.MapFallbackToPage("/_Host");     // Fallback to _Host.cshtml for all other routes
 
 app.Run();

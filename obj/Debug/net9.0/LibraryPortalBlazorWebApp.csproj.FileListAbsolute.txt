@@ -77,3 +77,5 @@ E:\GitHub\LibraryPortalBlazorWebApp\obj\Debug\net9.0\refint\LibraryPortalBlazorW
 E:\GitHub\LibraryPortalBlazorWebApp\obj\Debug\net9.0\LibraryPortalBlazorWebApp.pdb
 E:\GitHub\LibraryPortalBlazorWebApp\obj\Debug\net9.0\LibraryPortalBlazorWebApp.genruntimeconfig.cache
 E:\GitHub\LibraryPortalBlazorWebApp\obj\Debug\net9.0\ref\LibraryPortalBlazorWebApp.dll
+E:\GitHub\LibraryPortalBlazorWebApp\obj\Debug\net9.0\LibraryPortalBlazorWebApp.RazorAssemblyInfo.cache
+E:\GitHub\LibraryPortalBlazorWebApp\obj\Debug\net9.0\LibraryPortalBlazorWebApp.RazorAssemblyInfo.cs
