@@ -66,8 +66,6 @@ E:\GitHub\LibraryPortalBlazorWebApp\obj\Debug\net9.0\compressed\5fhcv67iit-notf2
 E:\GitHub\LibraryPortalBlazorWebApp\obj\Debug\net9.0\compressed\h4n4a8j4y3-h1s4sie4z3.gz
 E:\GitHub\LibraryPortalBlazorWebApp\obj\Debug\net9.0\compressed\jxdoyexhzh-63fj8s7r0e.gz
 E:\GitHub\LibraryPortalBlazorWebApp\obj\Debug\net9.0\compressed\88jrvqgwz3-0j3bgjxly4.gz
-E:\GitHub\LibraryPortalBlazorWebApp\obj\Debug\net9.0\compressed\jmlen3h4df-mcq2k440u9.gz
-E:\GitHub\LibraryPortalBlazorWebApp\obj\Debug\net9.0\compressed\jlaqxrzqbl-mcq2k440u9.gz
 E:\GitHub\LibraryPortalBlazorWebApp\obj\Debug\net9.0\staticwebassets.build.json
 E:\GitHub\LibraryPortalBlazorWebApp\obj\Debug\net9.0\staticwebassets.build.json.cache
 E:\GitHub\LibraryPortalBlazorWebApp\obj\Debug\net9.0\staticwebassets.development.json
@@ -79,3 +77,5 @@ E:\GitHub\LibraryPortalBlazorWebApp\obj\Debug\net9.0\LibraryPortalBlazorWebApp.g
 E:\GitHub\LibraryPortalBlazorWebApp\obj\Debug\net9.0\ref\LibraryPortalBlazorWebApp.dll
 E:\GitHub\LibraryPortalBlazorWebApp\obj\Debug\net9.0\LibraryPortalBlazorWebApp.RazorAssemblyInfo.cache
 E:\GitHub\LibraryPortalBlazorWebApp\obj\Debug\net9.0\LibraryPortalBlazorWebApp.RazorAssemblyInfo.cs
+E:\GitHub\LibraryPortalBlazorWebApp\obj\Debug\net9.0\compressed\jmlen3h4df-ihhnd88anx.gz
+E:\GitHub\LibraryPortalBlazorWebApp\obj\Debug\net9.0\compressed\jlaqxrzqbl-ihhnd88anx.gz

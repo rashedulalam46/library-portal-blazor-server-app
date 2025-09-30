@@ -29,7 +29,7 @@ public class BookService
 
     public async Task<Book?> UpdateBookAsync(Book book)
     {
-        var response = await _http.PutAsJsonAsync($"{_baseUrl}/{book.BookId}", book);
+        var response = await _http.PutAsJsonAsync($"{_baseUrl}/{book.book_id}", book);
         return await response.Content.ReadFromJsonAsync<Book>();
     }
 

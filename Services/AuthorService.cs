@@ -29,7 +29,7 @@ public class AuthorService
 
     public async Task<Author?> UpdateAuthorAsync(Author author)
     {
-        var response = await _http.PutAsJsonAsync($"{_baseUrl}/{author.AuthorId}", author);
+        var response = await _http.PutAsJsonAsync($"{_baseUrl}/{author.author_id}", author);
         return await response.Content.ReadFromJsonAsync<Author>();
     }
 

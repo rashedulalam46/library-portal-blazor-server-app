@@ -30,7 +30,7 @@ namespace LibraryPortalBlazorWebApp.Components.Services
 
         public async Task<Category?> UpdateCategoryAsync(Category category)
         {
-            var response = await _http.PutAsJsonAsync($"{_baseUrl}/{category.CategoryId}", category);
+            var response = await _http.PutAsJsonAsync($"{_baseUrl}/{category.category_id}", category);
             return await response.Content.ReadFromJsonAsync<Category>();
         }
 

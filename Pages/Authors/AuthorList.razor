@@ -1,6 +1,56 @@
 @page "/authors"
-@rendermode InteractiveServer
+@using LibraryPortalBlazorWebApp.Components.Models
+@using LibraryPortalBlazorWebApp.Components.Services
+@inject AuthorService AuthorService
 
-<PageTitle>Authors</PageTitle>
+<h3>Authors</h3>
 
-<h1>Authors List</h1>
+@if (authors == null)
+{
+    <p><em>Loading...</em></p>
+}
+else if (!authors.Any())
+{
+    <p>No authors found.</p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Author ID</th>
+                <th>Name</th>
+                <th>Country</th>
+                <th>Address</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Active</th>
+                <th>Created Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var author in authors)
+            {
+                <tr>
+                    <td>@author.author_id</td>
+                    <td>@author.author_name</td>
+                    <td>@author.country</td>
+                    <td>@author.address</td>
+                    <td>@author.phone</td>
+                    <td>@author.email</td>
+                    <td>@(author.active ? "Yes" : "No")</td>
+                    <td>@(author.create_date?.ToString("yyyy-MM-dd"))</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Author> authors;
+
+    protected override async Task OnInitializedAsync()
+    {
+        authors = (await AuthorService.GetAuthorsAsync()).ToList();
+    }
+}
