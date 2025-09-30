@@ -58,3 +58,7 @@ h1:focus {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
     text-align: start;
 }
+.validation-message {
+    color: red;
+    font-size: 0.875rem;
+}
