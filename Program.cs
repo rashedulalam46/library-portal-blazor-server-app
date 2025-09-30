@@ -6,6 +6,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Bind ApiSettings from appsettings.json
 builder.Services.Configure<ApiSettings>(builder.Configuration.GetSection("ApiSettings"));
 
+// Add services
+builder.Services.AddRazorComponents(); // or AddServerSideBlazor in older templates
+
 // Add Blazor services
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
