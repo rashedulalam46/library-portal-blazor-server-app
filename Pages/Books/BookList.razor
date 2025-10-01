@@ -1,5 +1,186 @@
 @page "/books"
+@using LibraryPortalBlazorWebApp.Components.Models
+@using LibraryPortalBlazorWebApp.Components.Services
+@inject BookService BookService
 
-<PageTitle>Books</PageTitle>
+<h3>Books</h3>
 
-<h1>Books List</h1>
+<button class="btn btn-primary mb-3" @onclick="OpenAddModal">Add New</button>
+
+@if (books == null)
+{
+    <p><em>Loading...</em></p>
+}
+else if (!books.Any())
+{
+    <p>No books found.</p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Book ID</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Publisher</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Active</th>
+                <th>Publis Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var  book in books)
+            {
+                <tr>
+                    <td>@book.BookId</td>
+                    <td>@book.Title</td>
+                    <td>@book.AuthorName</td>
+                    <td>@book.PublisherName</td>
+                    <td>@book.CategoryName</td>
+                    <td>@book.Price</td>
+                    <td>@(book.Active ? "Yes" : "No")</td>
+                    <td>@(book.PublishDate?.ToString("yyyy-MM-dd") ?? "")</td>
+                    <td>
+                        <button class="btn btn-sm btn-info me-2" @onclick="() => OpenEditModal(book)">Edit</button>
+                        <button class="btn btn-sm btn-danger" @onclick="() => OpenDeleteModal(book.BookId)">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<!-- Add/Edit Modal -->
+@if (isModalVisible)
+{
+    <div class="modal fade show d-block" tabindex="-1" style="background-color: rgba(0,0,0,0.5);">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">@modalTitle</h5>
+                    <button type="button" class="btn-close" @onclick="CloseModal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-2">
+                        <label>Title</label>
+                        <input class="form-control" @bind="currentBook.title" />
+                    </div>
+                    <div class="mb-2">
+                        <label>Author</label>
+                        <input class="form-control" @bind="currentBook.author_id" />
+                    </div>
+                    <div class="mb-2">
+                        <label>Publisher</label>
+                        <input class="form-control" @bind="currentBook.publisher_id" />
+                    </div>
+                    <div class="mb-2">
+                        <label>Category</label>
+                        <input class="form-control" @bind="currentBook.category_id" />
+                    </div>
+                    <div class="mb-2">
+                        <label>Price</label>
+                        <input class="form-control" type="number" step="0.01" @bind="currentBook.price" />
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" @bind="currentBook.active" />
+                        <label class="form-check-label">Active</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" @onclick="CloseModal">Cancel</button>
+                    <button class="btn btn-primary" @onclick="Save">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<!-- Delete Confirmation Modal -->
+@if (isDeleteModalVisible)
+{
+    <div class="modal fade show d-block" tabindex="-1" style="background-color: rgba(0,0,0,0.5);">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirm Delete</h5>
+                    <button type="button" class="btn-close" @onclick="CloseDeleteModal"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete this book?
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" @onclick="CloseDeleteModal">No</button>
+                    <button class="btn btn-danger" @onclick="DeleteConfirmed">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    private List<BookRead> books;     
+      private Book currentBook;
+    private string modalTitle;
+    private bool isModalVisible;
+    private bool isDeleteModalVisible;
+    private int deleteBookId;
+
+    protected override async Task OnInitializedAsync()
+    {
+        books = (await BookService.GetBooksAsync()).ToList();
+    }
+
+    private void OpenAddModal()
+    {
+        currentBook = new Book();
+        modalTitle = "Add New Book";
+        isModalVisible = true;
+    }
+
+    private void OpenEditModal(BookRead book)
+    {
+        @* currentBook = new Book
+        {
+            book_id = book.BookId,
+            title = book.Title,
+            author_name = book.AuthorName,
+            publisher_name = book.PublisherName,
+            category_name = book.CategoryName,
+            price = book.Price,
+            active = book.Active
+        }; *@
+        modalTitle = "Edit Book";
+        isModalVisible = true;
+    }
+
+    private void CloseModal() => isModalVisible = false;
+
+    private async Task Save()
+    {
+        if (currentBook.book_id == 0)
+            await BookService.AddBookAsync(currentBook);
+        else
+            await BookService.UpdateBookAsync(currentBook);
+
+        books = (await BookService.GetBooksAsync()).ToList();
+        isModalVisible = false;
+    }
+
+    private void OpenDeleteModal(int id)
+    {
+        deleteBookId = id;
+        isDeleteModalVisible = true;
+    }
+
+    private void CloseDeleteModal() => isDeleteModalVisible = false;
+
+    private async Task DeleteConfirmed()
+    {
+        await BookService.DeleteBookAsync(deleteBookId);
+        books = (await BookService.GetBooksAsync()).ToList();
+        isDeleteModalVisible = false;
+    }
+}

@@ -15,8 +15,8 @@ public class BookService
         _baseUrl = $"{options.Value.BaseUrl}/books";
     }
 
-    public async Task<List<Book>> GetBooksAsync()
-        => await _http.GetFromJsonAsync<List<Book>>(_baseUrl) ?? new List<Book>();
+    public async Task<List<BookRead>> GetBooksAsync()
+        => await _http.GetFromJsonAsync<List<BookRead>>(_baseUrl) ?? new List<BookRead>();
 
     public async Task<Book?> GetBookAsync(int id)
         => await _http.GetFromJsonAsync<Book>($"{_baseUrl}/{id}");
