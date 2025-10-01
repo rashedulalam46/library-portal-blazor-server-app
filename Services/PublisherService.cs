@@ -13,28 +13,28 @@ public class PublisherService
         public PublisherService(HttpClient http, IConfiguration config)
         {
             _http = http;
-            _baseUrl = config["ApiSettings:BaseUrl"] + "/categories";
+            _baseUrl = config["ApiSettings:BaseUrl"] + "/publishers";
         }
 
-        public async Task<List<Category>> GetCategoriesAsync()
-            => await _http.GetFromJsonAsync<List<Category>>(_baseUrl) ?? new List<Category>();
+        public async Task<List<Publisher>> GetPublishersAsync()
+            => await _http.GetFromJsonAsync<List<Publisher>>(_baseUrl) ?? new List<Publisher>();
 
-        public async Task<Category?> GetCategoryAsync(int id)
-            => await _http.GetFromJsonAsync<Category>($"{_baseUrl}/{id}");
+        public async Task<Publisher?> GetPublisherAsync(int id)
+            => await _http.GetFromJsonAsync<Publisher>($"{_baseUrl}/{id}");
 
-        public async Task<Category?> AddCategoryAsync(Category category)
+        public async Task<Publisher?> AddPublisherAsync(Publisher publisher)
         {
-            var response = await _http.PostAsJsonAsync(_baseUrl, category);
-            return await response.Content.ReadFromJsonAsync<Category>();
+            var response = await _http.PostAsJsonAsync(_baseUrl, publisher);
+            return await response.Content.ReadFromJsonAsync<Publisher>();
         }
 
-        public async Task<Category?> UpdateCategoryAsync(Category category)
+        public async Task<Publisher?> UpdatePublisherAsync(Publisher publisher)
         {
-            var response = await _http.PutAsJsonAsync($"{_baseUrl}/{category.category_id}", category);
-            return await response.Content.ReadFromJsonAsync<Category>();
+            var response = await _http.PutAsJsonAsync($"{_baseUrl}/{publisher.publisher_id}", publisher);
+            return await response.Content.ReadFromJsonAsync<Publisher>();
         }
 
-        public async Task<bool> DeleteCategoryAsync(int id)
+        public async Task<bool> DeletePublisherAsync(int id)
         {
             var response = await _http.DeleteAsync($"{_baseUrl}/{id}");
             return response.IsSuccessStatusCode;

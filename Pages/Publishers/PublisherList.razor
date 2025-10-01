@@ -1,6 +1,179 @@
 @page "/publishers"
+@using LibraryPortalBlazorWebApp.Components.Models
+@using LibraryPortalBlazorWebApp.Components.Services
+@inject PublisherService PublisherService
 
+<h3>Publishers</h3>
 
-<PageTitle>Publishers</PageTitle>
+<button class="btn btn-primary mb-3" @onclick="OpenAddModal">Add New</button>
 
-<h1>Publishers List</h1>
+@if (publishers == null)
+{
+    <p><em>Loading...</em></p>
+}
+else if (!publishers.Any())
+{
+    <p>No publishers found.</p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Publisher ID</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Active</th>
+                <th>Created Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var publisher in publishers)
+            {
+                <tr>
+                    <td>@publisher.publisher_id</td>
+                    <td>@publisher.publisher_name</td>
+                    <td>@publisher.address</td>
+                    <td>@publisher.phone</td>
+                    <td>@publisher.email</td>
+                    <td>@(publisher.active ? "Yes" : "No")</td>
+                    <td>@(publisher.create_date?.ToString("yyyy-MM-dd"))</td>
+                    <td>
+                        <button class="btn btn-sm btn-info me-2" @onclick="() => OpenEditModal(publisher)">Edit</button>
+                        <button class="btn btn-sm btn-danger" @onclick="() => OpenDeleteModal(publisher.publisher_id)">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<!-- Add/Edit Modal -->
+@if (isModalVisible)
+{
+    <div class="modal fade show d-block" tabindex="-1" style="background-color: rgba(0,0,0,0.5);">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">@modalTitle</h5>
+                    <button type="button" class="btn-close" @onclick="CloseModal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-2">
+                        <label>Name</label>
+                        <input class="form-control" @bind="currentPublisher.publisher_name" />
+                    </div>
+                    <div class="mb-2">
+                        <label>Address</label>
+                        <input class="form-control" @bind="currentPublisher.address" />
+                    </div>
+                    <div class="mb-2">
+                        <label>Phone</label>
+                        <input class="form-control" @bind="currentPublisher.phone" />
+                    </div>
+                    <div class="mb-2">
+                        <label>Email</label>
+                        <input class="form-control" @bind="currentPublisher.email" />
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" @bind="currentPublisher.active" />
+                        <label class="form-check-label">Active</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" @onclick="CloseModal">Cancel</button>
+                    <button class="btn btn-primary" @onclick="Save">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<!-- Delete Confirmation Modal -->
+@if (isDeleteModalVisible)
+{
+    <div class="modal fade show d-block" tabindex="-1" style="background-color: rgba(0,0,0,0.5);">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirm Delete</h5>
+                    <button type="button" class="btn-close" @onclick="CloseDeleteModal"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete this publisher?
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" @onclick="CloseDeleteModal">No</button>
+                    <button class="btn btn-danger" @onclick="DeleteConfirmed">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    private List<Publisher> publishers;
+    private Publisher currentPublisher;
+    private string modalTitle;
+    private bool isModalVisible;
+    private bool isDeleteModalVisible;
+    private int deletePublisherId;
+
+    protected override async Task OnInitializedAsync()
+    {
+        publishers = (await PublisherService.GetPublishersAsync()).ToList();
+    }
+
+    private void OpenAddModal()
+    {
+        currentPublisher = new Publisher();
+        modalTitle = "Add New Publisher";
+        isModalVisible = true;
+    }
+
+    private void OpenEditModal(Publisher publisher)
+    {
+        currentPublisher = new Publisher
+        {
+            publisher_id = publisher.publisher_id,
+            publisher_name = publisher.publisher_name,
+            address = publisher.address,
+            phone = publisher.phone,
+            email = publisher.email,
+            active = publisher.active
+        };
+        modalTitle = "Edit Publisher";
+        isModalVisible = true;
+    }
+
+    private void CloseModal() => isModalVisible = false;
+
+    private async Task Save()
+    {
+        if (currentPublisher.publisher_id == 0)
+            await PublisherService.AddPublisherAsync(currentPublisher);
+        else
+            await PublisherService.UpdatePublisherAsync(currentPublisher);
+
+        publishers = (await PublisherService.GetPublishersAsync()).ToList();
+        isModalVisible = false;
+    }
+
+    private void OpenDeleteModal(int id)
+    {
+        deletePublisherId = id;
+        isDeleteModalVisible = true;
+    }
+
+    private void CloseDeleteModal() => isDeleteModalVisible = false;
+
+    private async Task DeleteConfirmed()
+    {
+        await PublisherService.DeletePublisherAsync(deletePublisherId);
+        publishers = (await PublisherService.GetPublishersAsync()).ToList();
+        isDeleteModalVisible = false;
+    }
+}
