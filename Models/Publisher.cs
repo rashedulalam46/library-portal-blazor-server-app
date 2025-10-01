@@ -24,11 +24,8 @@ public class Publisher
 	[EmailAddress(ErrorMessage = "Invalid email address format.")]
 	[StringLength(200, ErrorMessage = "Email cannot exceed 200 characters.")]
 	public string email { get; set; }
-
-	[DataType(DataType.Date, ErrorMessage = "Invalid date format.")]
+	
     public DateTime? create_date { get; set; }
-
-	[Required(ErrorMessage = "Active status is required.")]
-	[DefaultValue(true)]
-	public bool active { get; set; }
+	
+		public bool active { get; set; }
 }
