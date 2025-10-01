@@ -56,47 +56,65 @@ else
 <!-- Add/Edit Modal -->
 @if (isModalVisible)
 {
-    <div class="modal fade show d-block" tabindex="-1" style="background-color: rgba(0,0,0,0.5);">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">@modalTitle</h5>
-                    <button type="button" class="btn-close" @onclick="CloseModal"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="mb-2">
-                        <label>Name</label>
-                        <input class="form-control" @bind="currentAuthor.author_name" />
+    <EditForm Model="currentAuthor" OnValidSubmit="Save">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="modal fade show d-block" tabindex="-1" style="background-color: rgba(0,0,0,0.5);">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">@modalTitle</h5>
+                        <button type="button" class="btn-close" @onclick="CloseModal"></button>
                     </div>
-                    <div class="mb-2">
-                        <label>Country</label>
-                        <input class="form-control" @bind="currentAuthor.country" />
+
+                    <div class="modal-body">
+                        <div class="mb-2">
+                            <label>Name</label>
+                            <InputText class="form-control" @bind-Value="currentAuthor.author_name" />
+                            <ValidationMessage For="@(() => currentAuthor.author_name)" />
+                        </div>
+
+                        <div class="mb-2">
+                            <label>Country</label>
+                            <InputText class="form-control" @bind-Value="currentAuthor.country" />
+                            <ValidationMessage For="@(() => currentAuthor.country)" />
+                        </div>
+
+                        <div class="mb-2">
+                            <label>Address</label>
+                            <InputText class="form-control" @bind-Value="currentAuthor.address" />
+                            <ValidationMessage For="@(() => currentAuthor.address)" />
+                        </div>
+
+                        <div class="mb-2">
+                            <label>Phone</label>
+                            <InputText class="form-control" type="tel" @bind-Value="currentAuthor.phone" />
+                            <ValidationMessage For="@(() => currentAuthor.phone)" />
+                        </div>
+
+                        <div class="mb-2">
+                            <label>Email</label>
+                            <InputText class="form-control" @bind-Value="currentAuthor.email" />
+                            <ValidationMessage For="@(() => currentAuthor.email)" />
+                        </div>
+
+                        <div class="form-check mb-2">
+                            <InputCheckbox class="form-check-input" @bind-Value="currentAuthor.active" />
+                            <label class="form-check-label">Active</label>
+                        </div>
                     </div>
-                    <div class="mb-2">
-                        <label>Address</label>
-                        <input class="form-control" @bind="currentAuthor.address" />
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" @onclick="CloseModal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
                     </div>
-                    <div class="mb-2">
-                        <label>Phone</label>
-                        <input class="form-control" @bind="currentAuthor.phone" />
-                    </div>
-                    <div class="mb-2">
-                        <label>Email</label>
-                        <input class="form-control" @bind="currentAuthor.email" />
-                    </div>
-                    <div class="form-check mb-2">
-                        <input class="form-check-input" type="checkbox" @bind="currentAuthor.active" />
-                        <label class="form-check-label">Active</label>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" @onclick="CloseModal">Cancel</button>
-                    <button class="btn btn-primary" @onclick="Save">Save</button>
                 </div>
             </div>
         </div>
-    </div>
+    </EditForm>
 }
+
 
 <!-- Delete Confirmation Modal -->
 @if (isDeleteModalVisible)
@@ -156,7 +174,13 @@ else
         isModalVisible = true;
     }
 
-    private void CloseModal() => isModalVisible = false;
+     private void CloseModal()
+    {
+        currentAuthor = new Author();
+        StateHasChanged();
+        isModalVisible = false;
+    }
+
 
     private async Task Save()
     {
