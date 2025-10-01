@@ -138,7 +138,7 @@ else
     private bool isModalVisible;
     private bool isDeleteModalVisible;
     private int deletePublisherId;
-  
+
     protected override async Task OnInitializedAsync()
     {
         publishers = (await PublisherService.GetPublishersAsync()).ToList();
@@ -151,12 +151,12 @@ else
             active = true // default to true
         };
         modalTitle = "Add New Publisher";
-        isModalVisible = true;        
+        isModalVisible = true;
     }
 
     private void OpenEditModal(Publisher publisher)
     {
-        
+
         currentPublisher = new Publisher
         {
             publisher_id = publisher.publisher_id,
@@ -171,9 +171,10 @@ else
     }
 
     private void CloseModal()
-    {       
+    {
         currentPublisher = new Publisher();
         StateHasChanged();
+        isModalVisible = false;
     }
 
     private async Task Save()
