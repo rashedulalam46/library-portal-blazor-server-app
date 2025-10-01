@@ -50,35 +50,47 @@ else
 <!-- Add/Edit Modal -->
 @if (isModalVisible)
 {
-    <div class="modal fade show d-block" tabindex="-1" style="background-color: rgba(0,0,0,0.5);">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">@modalTitle</h5>
-                    <button type="button" class="btn-close" @onclick="CloseModal"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="mb-2">
-                        <label>Name</label>
-                        <input class="form-control" @bind="currentCategory.category_name" />
+    <EditForm Model="currentCategory" OnValidSubmit="Save">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="modal fade show d-block" tabindex="-1" style="background-color: rgba(0,0,0,0.5);">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">@modalTitle</h5>
+                        <button type="button" class="btn-close" @onclick="CloseModal"></button>
                     </div>
-                    <div class="mb-2">
-                        <label>Description</label>
-                        <textarea class="form-control" @bind="currentCategory.description"></textarea>
+
+                    <div class="modal-body">
+                        <div class="mb-2">
+                            <label>Name</label>
+                            <InputText class="form-control" @bind-Value="currentCategory.category_name" />
+                            <ValidationMessage For="@(() => currentCategory.category_name)" />
+                        </div>
+
+                        <div class="mb-2">
+                            <label>Description</label>
+                            <InputTextArea class="form-control" @bind-Value="currentCategory.description" />
+                            <ValidationMessage For="@(() => currentCategory.description)" />
+                        </div>
+
+                        <div class="form-check mb-2">
+                            <InputCheckbox class="form-check-input" @bind-Value="currentCategory.active" />
+                            <label class="form-check-label">Active</label>
+                        </div>
                     </div>
-                    <div class="form-check mb-2">
-                        <input class="form-check-input" type="checkbox" @bind="currentCategory.active" />
-                        <label class="form-check-label">Active</label>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" @onclick="CloseModal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" @onclick="CloseModal">Cancel</button>
-                    <button class="btn btn-primary" @onclick="Save">Save</button>
                 </div>
             </div>
         </div>
-    </div>
+    </EditForm>
 }
+
 
 <!-- Delete Confirmation Modal -->
 @if (isDeleteModalVisible)
@@ -135,7 +147,12 @@ else
         isModalVisible = true;
     }
 
-    private void CloseModal() => isModalVisible = false;
+    private void CloseModal()
+    {
+        currentCategory = new Category();
+        StateHasChanged();
+        isModalVisible = false;
+    }
 
     private async Task Save()
     {
