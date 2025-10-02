@@ -1,5 +1,6 @@
 using LibraryPortalBlazorWebApp;
 using LibraryPortalBlazorWebApp.Components.Services;
+using LibraryPortalBlazorWebApp.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +20,7 @@ builder.Services.AddScoped<BookService>();
 builder.Services.AddScoped<AuthorService>();
 builder.Services.AddScoped<CategoryService>();
 builder.Services.AddScoped<PublisherService>();
+builder.Services.AddScoped<DropdownService>();
 
 var app = builder.Build();
 
