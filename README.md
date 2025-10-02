@@ -45,3 +45,43 @@ Before running, ensure you have:
    ```bash
    git clone https://github.com/rashedulalam46/library-portal-blazor-web-app.git
    cd library-portal-blazor-web-app
+   ```
+   
+Open the solution in your IDE (e.g. LibraryPortalBlazorWebApp.sln).
+
+Configure settings:
+
+In appsettings.json / appsettings.Development.json, update the API endpoint or connection string.
+
+If you have an ApiSettings.cs, adjust base URLs etc.
+
+# Build & run:
+```
+dotnet build
+dotnet run
+```
+
+Or run from your IDE with debugging.
+
+Navigate to https://localhost:5001 (or the configured port) in your browser.
+
+# Project Structure
+
+```
+/
+│
+├── Components/        # Reusable Blazor components  
+├── Models/            # Data models / DTOs  
+├── Pages/             # Blazor pages / routing  
+├── Services/           # Services (API clients, business logic)  
+├── wwwroot/            # Static assets (css, js, images)  
+├── ApiSettings.cs      # Configuration helper  
+├── Program.cs          # App startup  
+├── Routes.razor         # Routing definitions  
+├── LibraryPortalBlazorWebApp.csproj  
+├── LibraryPortalBlazorWebApp.sln  
+├── appsettings.json  
+└── appsettings.Development.json  
+
+```
+
