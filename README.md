@@ -1,6 +1,6 @@
 # Library Portal – Blazor Web App
 
-A web-based library portal built using **Blazor** for managing books, users, and loans.
+A web-based library portal built using **Blazor** for managing books, categories, authors.
 
 ---
 
@@ -16,7 +16,7 @@ A web-based library portal built using **Blazor** for managing books, users, and
 
 ## Architecture & Tech Stack
 
-- **Frontend / UI**: Blazor (Server)  
+- **Frontend / UI**: Blazor Server App
 - **Backend / API Layer**: ASP.NET Core Web API  
 - **Data / Storage**: QL Server
 - **Languages & Tools**:  
