@@ -1,38 +1,41 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace LibraryPortalBlazorWebApp.Components.Models;
 
 public class Book
     {
        
-    public int book_id { get; set; }
-	public string title { get; set; }
+   public int book_id { get; set; }
 
+	[Required(ErrorMessage = "Title is required.")]
+	[StringLength(100, ErrorMessage = "Title cannot exceed 200 characters.")]
+	public string? title { get; set; }
 
-	public string description { get; set; }
+	[StringLength(250, ErrorMessage = "Description cannot exceed 1000 characters.")]
+	public string? description { get; set; }
 
-
+	[Required(ErrorMessage = "Author is required.")]
 	public int? author_id { get; set; }
 
-
+	[Required(ErrorMessage = "Category is required.")]
 	public int? category_id { get; set; }
 
-
+	[Required(ErrorMessage = "Publisher is required.")]
 	public int? publisher_id { get; set; }
 
-	
+	[DataType(DataType.Date, ErrorMessage = "Invalid date format.")]
 	public DateTime? publish_date { get; set; }
 
+	[Required(ErrorMessage = "ISBN is required.")]
+	[StringLength(20, ErrorMessage = "ISBN cannot exceed 20 characters.")]
+	public string? ISBN { get; set; }
 
-	public string ISBN { get; set; }
-
-
-	public decimal? price { get; set; }
-
-
-    public DateTime? create_date { get; set; }
+    [Range(0, 10000, ErrorMessage = "Price must be between 0 and 10,000.")]
+    [Required(ErrorMessage = "Price is required.")]
+	public decimal price { get; set; }
 	
-
+	
 	public bool active { get; set; }
     }
 
@@ -47,7 +50,7 @@ public class Book
         public int? PublisherId { get; set; }
         public DateTime? PublishDate { get; set; }
         public string ISBN { get; set; }
-        public decimal? Price { get; set; }
+        public decimal Price { get; set; }
         public bool Active { get; set; }
         public DateTime? CreateDate { get; set; }
 
