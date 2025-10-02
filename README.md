@@ -6,9 +6,7 @@ A web-based library portal built using **Blazor** for managing books, users, and
 
 ## Features
 
-- User authentication & roles (e.g. Admin, Librarian, Member)  
 - CRUD operations on books, categories, authors  
-- Issue / return book transactions  
 - Search, filtering, pagination  
 - Responsive UI using Blazor components  
 - API integration layer (to backend services)  
@@ -34,7 +32,7 @@ A web-based library portal built using **Blazor** for managing books, users, and
 
 Before running, ensure you have:
 
-- [.NET SDK 9.0 (or the version your project targets)]  
+- [.NET SDK 9.0 ]  
 -  A SQL Server database 
 - An IDE or code editor (e.g. Visual Studio, VS Code)  
 
@@ -47,15 +45,12 @@ Before running, ensure you have:
    cd library-portal-blazor-web-app
    ```
    
-Open the solution in your IDE (e.g. LibraryPortalBlazorWebApp.sln).
+2. Open the solution in your IDE (e.g. LibraryPortalBlazorWebApp.sln).
 
-Configure settings:
+ - Configure settings: In appsettings.json / appsettings.Development.json, update the API endpoint or connection string.
+ - If you have an ApiSettings.cs, adjust base URLs etc.
 
-In appsettings.json / appsettings.Development.json, update the API endpoint or connection string.
-
-If you have an ApiSettings.cs, adjust base URLs etc.
-
-# Build & run:
+3. Build & run:
 ```
 dotnet build
 dotnet run
@@ -63,7 +58,7 @@ dotnet run
 
 Or run from your IDE with debugging.
 
-Navigate to https://localhost:5001 (or the configured port) in your browser.
+4. Navigate to https://localhost:5001 (or the configured port) in your browser.
 
 # Project Structure
 
@@ -83,5 +78,12 @@ Navigate to https://localhost:5001 (or the configured port) in your browser.
 ├── appsettings.json  
 └── appsettings.Development.json  
 
+```
+# Configuration
+| File                           | Purpose                                    |
+| ------------------------------ | ------------------------------------------ |
+| `appsettings.json`             | Production settings (e.g. API URL, keys)   |
+| `appsettings.Development.json` | Local / development overrides              |
+| `ApiSettings.cs`               | Strongly-typed class for API configuration |
 ```
 
