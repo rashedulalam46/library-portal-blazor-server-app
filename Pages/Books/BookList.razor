@@ -1,7 +1,10 @@
 @page "/books"
 @using LibraryPortalBlazorWebApp.Components.Models
 @using LibraryPortalBlazorWebApp.Components.Services
+@using LibraryPortalBlazorWebApp.Models
+@using LibraryPortalBlazorWebApp.Services
 @inject BookService BookService
+@inject DropdownService DropdownService
 
 <h3>Books</h3>
 
@@ -32,7 +35,7 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var  book in books)
+            @foreach (var book in books)
             {
                 <tr>
                     <td>@book.BookId</td>
@@ -70,15 +73,33 @@ else
                     </div>
                     <div class="mb-2">
                         <label>Author</label>
-                        <input class="form-control" @bind="currentBook.author_id" />
+                        <InputSelect class="form-control" @bind-Value="currentBook.author_id">
+                            <option value="">-- Select Author --</option>
+                            @foreach (var author in authors)
+                            {
+                                <option value="@author.Value">@author.Text</option>
+                            }
+                        </InputSelect>
                     </div>
                     <div class="mb-2">
                         <label>Publisher</label>
-                        <input class="form-control" @bind="currentBook.publisher_id" />
+                        <InputSelect class="form-control" @bind-Value="currentBook.publisher_id">
+                            <option value="">-- Select Publisher --</option>
+                            @foreach (var publisher in publishers)
+                            {
+                                <option value="@publisher.Value">@publisher.Text</option>
+                            }
+                        </InputSelect>
                     </div>
                     <div class="mb-2">
                         <label>Category</label>
-                        <input class="form-control" @bind="currentBook.category_id" />
+                        <InputSelect class="form-control" @bind-Value="currentBook.category_id">
+                            <option value="">-- Select Category --</option>
+                            @foreach (var category in categories)
+                            {
+                                <option value="@category.Value">@category.Text</option>
+                            }
+                        </InputSelect>
                     </div>
                     <div class="mb-2">
                         <label>Price</label>
@@ -121,16 +142,23 @@ else
 }
 
 @code {
-    private List<BookRead> books;     
-      private Book currentBook;
+    private List<BookRead> books;
+    private Book currentBook;
     private string modalTitle;
     private bool isModalVisible;
     private bool isDeleteModalVisible;
     private int deleteBookId;
 
+    private List<DropdownItem> authors = new();
+    private List<DropdownItem> categories = new();
+    private List<DropdownItem> publishers = new();
+
     protected override async Task OnInitializedAsync()
     {
         books = (await BookService.GetBooksAsync()).ToList();
+        authors = await DropdownService.GetAuthorsAsync();
+        categories = await DropdownService.GetCategoriesAsync();
+        publishers = await DropdownService.GetPublishersAsync();
     }
 
     private void OpenAddModal()

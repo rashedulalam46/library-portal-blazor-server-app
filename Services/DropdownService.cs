@@ -16,7 +16,7 @@ public class DropdownService
     }
 
     public async Task<List<DropdownItem>> GetCategoriesAsync()
-        => await _http.GetFromJsonAsync<List<DropdownItem>>(_baseUrl) ?? new List<DropdownItem>();
+        => await _http.GetFromJsonAsync<List<DropdownItem>>($"{_baseUrl}/categories") ?? new List<DropdownItem>();      
 
     public async Task<List<DropdownItem>> GetAuthorsAsync()
         => await _http.GetFromJsonAsync<List<DropdownItem>>($"{_baseUrl}/authors") ?? new List<DropdownItem>();

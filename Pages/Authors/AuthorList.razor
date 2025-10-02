@@ -81,12 +81,12 @@ else
                         <div class="mb-2">
                             <label>Country</label>
                             <InputSelect class="form-control" @bind-Value="currentAuthor.country">
-    <option value="">-- Select Country --</option>
-    @foreach (var country in countries)
-    {
-        <option value="@country.Value">@country.Text</option>
-    }
-</InputSelect>
+                                <option value="">-- Select Country --</option>
+                                @foreach (var country in countries)
+                                {
+                                    <option value="@country.Value">@country.Text</option>
+                                }
+                            </InputSelect>
                             <ValidationMessage For="@(() => currentAuthor.country)" />
                         </div>
 
@@ -155,12 +155,12 @@ else
     private bool isDeleteModalVisible;
     private int deleteAuthorId;
 
-  private List<DropdownItem> countries = new();
+    private List<DropdownItem> countries = new();
 
     protected override async Task OnInitializedAsync()
     {
         authors = (await AuthorService.GetAuthorsAsync()).ToList();
-         countries = await DropdownService.GetCountriesAsync();
+        countries = await DropdownService.GetCountriesAsync();
     }
 
     private void OpenAddModal()
@@ -168,7 +168,7 @@ else
         currentAuthor = new Author();
         modalTitle = "Add New Author";
         isModalVisible = true;
-       
+
     }
 
     private void OpenEditModal(Author author)
@@ -187,7 +187,7 @@ else
         isModalVisible = true;
     }
 
-     private void CloseModal()
+    private void CloseModal()
     {
         currentAuthor = new Author();
         StateHasChanged();
