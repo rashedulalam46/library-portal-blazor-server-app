@@ -28,9 +28,10 @@ else
                 <th>Author</th>
                 <th>Publisher</th>
                 <th>Category</th>
+                <th>ISBN</th>
                 <th>Price</th>
                 <th>Active</th>
-                <th>Publis Date</th>
+                <th>Publish Date</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -43,6 +44,7 @@ else
                     <td>@book.AuthorName</td>
                     <td>@book.PublisherName</td>
                     <td>@book.CategoryName</td>
+                    <td>@book.ISBN</td>
                     <td>@book.Price</td>
                     <td>@(book.Active ? "Yes" : "No")</td>
                     <td>@(book.PublishDate?.ToString("yyyy-MM-dd") ?? "")</td>
@@ -72,8 +74,8 @@ else
                     </div>
                     <div class="modal-body">
                         <div class="mb-2">
-                            <label>Title</label>                            
-                            <InputText class="form-control" @bind-Value="currentBook.title" />                           
+                            <label>Title</label>
+                            <InputText class="form-control" @bind-Value="currentBook.title" />
                             <ValidationMessage For="@(() => currentBook.title)" />
                         </div>
                         <div class="mb-2">
@@ -115,8 +117,8 @@ else
                             <ValidationMessage For="@(() => currentBook.category_id)" />
                         </div>
                         <div class="mb-2">
-                            <label>ISBN</label>                            
-                            <InputText class="form-control" @bind-Value="currentBook.ISBN" />                           
+                            <label>ISBN</label>
+                            <InputText class="form-control" @bind-Value="currentBook.ISBN" />
                             <ValidationMessage For="@(() => currentBook.ISBN)" />
                         </div>
                         <div class="mb-2">
@@ -129,7 +131,7 @@ else
                             <label class="form-check-label">Active</label>
                         </div>
                     </div>
-                    <div class="modal-footer">                   
+                    <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" @onclick="CloseModal">Cancel</button>
                         <button type="submit" class="btn btn-primary">Save</button>
                     </div>
@@ -196,7 +198,7 @@ else
             title = book.Title,
             description = book.Description,
             publisher_id = book.PublisherId,
-            category_id = book.CategoryId,            
+            category_id = book.CategoryId,
             author_id = book.AuthorId,
             ISBN = book.ISBN,
             price = book.Price,
@@ -206,7 +208,7 @@ else
         isModalVisible = true;
     }
 
-     private void CloseModal()
+    private void CloseModal()
     {
         currentBook = new Book();
         StateHasChanged();
