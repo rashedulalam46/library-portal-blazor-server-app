@@ -20,6 +20,10 @@ else if (!books.Any())
 }
 else
 {
+     <div class="d-flex mb-2">
+        <input type="text" class="form-control" placeholder="Search by name, address, phone" @bind="searchText"
+            @bind:event="oninput" />
+    </div>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -36,7 +40,7 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var book in books)
+            @foreach (var book in GetFilteredBooks())
             {
                 <tr>
                     <td>@book.BookId</td>
@@ -241,4 +245,21 @@ else
         books = (await BookService.GetBooksAsync()).ToList();
         isDeleteModalVisible = false;
     }
+
+     //Search functionality
+    private string searchText = string.Empty;
+    private IEnumerable<BookRead> GetFilteredBooks()
+    {
+        if (string.IsNullOrWhiteSpace(searchText))
+        {
+            return books;
+        }
+
+        return books.Where(b =>
+        (b.Title?.Contains(searchText, StringComparison.OrdinalIgnoreCase) ?? false) ||
+        (b.Description?.Contains(searchText, StringComparison.OrdinalIgnoreCase) ?? false));
+    }
+    //End Search functionality
+     
+   
 }

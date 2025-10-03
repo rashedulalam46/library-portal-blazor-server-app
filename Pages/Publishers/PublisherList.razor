@@ -18,7 +18,8 @@ else if (!publishers.Any())
 else
 {
     <div class="d-flex mb-2">
-        <input type="text" class="form-control" placeholder="Search by name, address, phone" @bind="searchText" @bind:event="oninput" />
+        <input type="text" class="form-control" placeholder="Search by name, address, phone" @bind="searchText"
+            @bind:event="oninput" />
     </div>
 
     <table class="table table-striped">
@@ -156,7 +157,7 @@ else
         (p.publisher_name?.Contains(searchText, StringComparison.OrdinalIgnoreCase) ?? false) ||
         (p.address?.Contains(searchText, StringComparison.OrdinalIgnoreCase) ?? false) ||
         (p.phone?.Contains(searchText, StringComparison.OrdinalIgnoreCase) ?? false));
-        
+
     }
     //End Search functionality
 

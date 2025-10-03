@@ -17,6 +17,11 @@ else if (!categories.Any())
 }
 else
 {
+     <div class="d-flex mb-2">
+        <input type="text" class="form-control" placeholder="Search by name, address, phone" @bind="searchText"
+            @bind:event="oninput" />
+    </div>
+
     <table class="table table-striped">
         <thead>
             <tr>
@@ -29,7 +34,7 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var category in categories)
+            @foreach (var category in GetFilteredCategories())
             {
                 <tr>
                     <td>@category.category_id</td>
@@ -179,4 +184,20 @@ else
         categories = (await CategoryService.GetCategoriesAsync()).ToList();
         isDeleteModalVisible = false;
     }
+
+    //Search functionality
+    private string searchText = string.Empty;
+    private IEnumerable<Category> GetFilteredCategories()
+    {
+        if (string.IsNullOrWhiteSpace(searchText))
+        {
+            return categories;
+        }
+
+        return categories.Where(c =>
+        (c.category_name?.Contains(searchText, StringComparison.OrdinalIgnoreCase) ?? false) ||
+        (c.description?.Contains(searchText, StringComparison.OrdinalIgnoreCase) ?? false));        
+
+    }
+    //End Search functionality
 }
