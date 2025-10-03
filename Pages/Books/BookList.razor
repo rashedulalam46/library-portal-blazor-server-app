@@ -115,6 +115,11 @@ else
                             <ValidationMessage For="@(() => currentBook.category_id)" />
                         </div>
                         <div class="mb-2">
+                            <label>ISBN</label>                            
+                            <InputText class="form-control" @bind-Value="currentBook.ISBN" />                           
+                            <ValidationMessage For="@(() => currentBook.ISBN)" />
+                        </div>
+                        <div class="mb-2">
                             <label>Price</label>
                             <InputNumber class="form-control" @bind-Value="currentBook.price" />
                             <ValidationMessage For="@(() => currentBook.price)" />
@@ -124,9 +129,9 @@ else
                             <label class="form-check-label">Active</label>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary" @onclick="CloseModal">Cancel</button>
-                        <button class="btn btn-primary" @onclick="Save">Save</button>
+                    <div class="modal-footer">                   
+                        <button type="button" class="btn btn-secondary" @onclick="CloseModal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
                     </div>
                 </div>
             </div>
@@ -193,6 +198,7 @@ else
             publisher_id = book.PublisherId,
             category_id = book.CategoryId,            
             author_id = book.AuthorId,
+            ISBN = book.ISBN,
             price = book.Price,
             active = book.Active
         };
