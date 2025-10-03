@@ -21,7 +21,7 @@ else if (!books.Any())
 else
 {
      <div class="d-flex mb-2">
-        <input type="text" class="form-control" placeholder="Search by name, address, phone" @bind="searchText"
+        <input type="text" class="form-control" placeholder="Search by title, author, publisher, category, isbn" @bind="searchText"
             @bind:event="oninput" />
     </div>
     <table class="table table-striped">
@@ -257,7 +257,11 @@ else
 
         return books.Where(b =>
         (b.Title?.Contains(searchText, StringComparison.OrdinalIgnoreCase) ?? false) ||
-        (b.Description?.Contains(searchText, StringComparison.OrdinalIgnoreCase) ?? false));
+        (b.Description?.Contains(searchText, StringComparison.OrdinalIgnoreCase) ?? false) ||
+        (b.AuthorName?.Contains(searchText, StringComparison.OrdinalIgnoreCase) ?? false) ||
+        (b.PublisherName?.Contains(searchText, StringComparison.OrdinalIgnoreCase) ?? false) || 
+        (b.CategoryName?.Contains(searchText, StringComparison.OrdinalIgnoreCase) ?? false) ||
+        (b.ISBN?.Contains(searchText, StringComparison.OrdinalIgnoreCase) ?? false));
     }
     //End Search functionality
      
