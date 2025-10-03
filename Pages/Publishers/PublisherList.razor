@@ -17,6 +17,10 @@ else if (!publishers.Any())
 }
 else
 {
+    <div class="d-flex mb-2">
+        <input type="text" class="form-control" placeholder="Search by name, address, phone" @bind="searchText" @bind:event="oninput" />
+    </div>
+
     <table class="table table-striped">
         <thead>
             <tr>
@@ -31,7 +35,7 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var publisher in publishers)
+            @foreach (var publisher in GetFilteredPublishers())
             {
                 <tr>
                     <td>@publisher.publisher_id</td>
@@ -134,10 +138,27 @@ else
 @code {
     private List<Publisher> publishers;
     private Publisher currentPublisher = new Publisher(); // not Publishers
-    private string modalTitle;
+    private string? modalTitle;
     private bool isModalVisible;
     private bool isDeleteModalVisible;
     private int deletePublisherId;
+
+    //Search functionality
+    private string searchText = string.Empty;
+    private IEnumerable<Publisher> GetFilteredPublishers()
+    {
+        if (string.IsNullOrWhiteSpace(searchText))
+        {
+            return publishers;
+        }
+
+        return publishers.Where(p =>
+        (p.publisher_name?.Contains(searchText, StringComparison.OrdinalIgnoreCase) ?? false) ||
+        (p.address?.Contains(searchText, StringComparison.OrdinalIgnoreCase) ?? false) ||
+        (p.phone?.Contains(searchText, StringComparison.OrdinalIgnoreCase) ?? false));
+        
+    }
+    //End Search functionality
 
     protected override async Task OnInitializedAsync()
     {
