@@ -41,11 +41,11 @@ Before running, ensure you have:
 1. Clone this repository:
 
    ```bash
-   git clone https://github.com/rashedulalam46/library-portal-blazor-web-app.git
-   cd library-portal-blazor-web-app
+   git clone https://github.com/rashedulalam46/library-portal-blazor-server-app.git
+   cd library-portal-blazor-server-app
    ```
    
-2. Open the solution in your IDE (e.g. LibraryPortalBlazorWebApp.sln).
+2. Open the solution in your IDE (e.g. LibraryPortalBlazorServerApp.sln).
 
  - Configure settings: In appsettings.json / appsettings.Development.json, update the API endpoint or connection string.
  - If you have an ApiSettings.cs, adjust base URLs etc.
@@ -73,8 +73,8 @@ Or run from your IDE with debugging.
 ├── ApiSettings.cs      # Configuration helper  
 ├── Program.cs          # App startup  
 ├── Routes.razor         # Routing definitions  
-├── LibraryPortalBlazorWebApp.csproj  
-├── LibraryPortalBlazorWebApp.sln  
+├── LibraryPortalBlazorServerApp.csproj  
+├── LibraryPortalBlazorServerApp.sln  
 ├── appsettings.json  
 └── appsettings.Development.json  
 
