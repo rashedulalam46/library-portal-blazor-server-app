@@ -1,8 +1,8 @@
 using System.Net.Http.Json;
-using LibraryPortalBlazorServerApp.Components.Models;
+using LibraryPortalBlazorServerApp.Models;
 using Microsoft.Extensions.Options;
 
-namespace LibraryPortalBlazorServerApp.Components.Services;
+namespace LibraryPortalBlazorServerApp.Services;
 
 public class AuthorService
 {

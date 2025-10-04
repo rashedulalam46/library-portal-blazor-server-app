@@ -1,7 +1,7 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace LibraryPortalBlazorServerApp.Components.Models;
+namespace LibraryPortalBlazorServerApp.Models;
 
 public class Publisher
 {
