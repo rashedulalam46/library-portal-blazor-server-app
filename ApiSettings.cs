@@ -1,4 +1,4 @@
-namespace LibraryPortalBlazorWebApp;
+namespace LibraryPortalBlazorServerApp;
 
 public class ApiSettings
 {

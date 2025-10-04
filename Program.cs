@@ -1,6 +1,6 @@
-using LibraryPortalBlazorWebApp;
-using LibraryPortalBlazorWebApp.Components.Services;
-using LibraryPortalBlazorWebApp.Services;
+using LibraryPortalBlazorServerApp;
+using LibraryPortalBlazorServerApp.Components.Services;
+using LibraryPortalBlazorServerApp.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

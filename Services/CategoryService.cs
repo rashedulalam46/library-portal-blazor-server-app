@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using LibraryPortalBlazorWebApp.Components.Models;
+using LibraryPortalBlazorServerApp.Components.Models;
 using Microsoft.Extensions.Options;
 
-namespace LibraryPortalBlazorWebApp.Components.Services
+namespace LibraryPortalBlazorServerApp.Components.Services
 {
     public class CategoryService
     {

@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace LibraryPortalBlazorWebApp.Components.Models;
+namespace LibraryPortalBlazorServerApp.Components.Models;
 
 public class Book
 {

@@ -43,7 +43,7 @@ wwwroot/lib/**/package-lock.json
 wwwroot/lib/**/yarn.lock
 
 # Exclude Blazor build-generated CSS and JS files from git
-wwwroot/LibraryPortalBlazorWebApp.styles.css
+wwwroot/LibraryPortalBlazorServerApp.styles.css
 wwwroot/_framework/
 
 # Keep your local CSS (app.css) and Bootstrap folder

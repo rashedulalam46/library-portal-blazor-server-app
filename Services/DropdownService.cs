@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using LibraryPortalBlazorWebApp.Models;
+using LibraryPortalBlazorServerApp.Models;
 
-namespace LibraryPortalBlazorWebApp.Services;
+namespace LibraryPortalBlazorServerApp.Services;
 
 public class DropdownService
 {
