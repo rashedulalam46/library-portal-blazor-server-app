@@ -1,4 +1,4 @@
-# Library Portal – Blazor Web App
+# Library Portal – Blazor Server App
 
 A web-based library portal built using **Blazor** for managing books, categories, authors.
 
