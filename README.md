@@ -33,8 +33,9 @@ A web-based library portal built using **Blazor** for managing books, categories
 Before running, ensure you have:
 
 - [.NET SDK 9.0 ]  
--  A SQL Server database 
-- An IDE or code editor (e.g. Visual Studio, VS Code)  
+- An IDE or code editor (e.g. Visual Studio, VS Code)
+- Backend API service running (or mock API endpoints for testing)
+- [You can use this REST API](https://github.com/rashedulalam46/library-api-sqlserver) 
 
 ### Setup & Run
 
