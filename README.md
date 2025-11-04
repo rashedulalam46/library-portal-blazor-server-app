@@ -18,7 +18,7 @@ A web-based library portal built using **Blazor** for managing books, categories
 
 - **Frontend / UI**: Blazor Server App
 - **Backend / API Layer**: ASP.NET Core Web API  
-- **Data / Storage**: QL Server
+- **Data / Storage**: MS SQL Server
 - **Languages & Tools**:  
   - C# (Blazor, .NET 9.0)  
   - HTML / CSS  
